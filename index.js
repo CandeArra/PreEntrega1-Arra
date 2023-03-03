@@ -2,6 +2,11 @@ let nombreUsuario = prompt(
   "Hola! Bienvenido a la pasteleria de Candelaria, cómo te llamas?"
 );
 
+function mult(num1, num2) {
+  let resultado = num1 * num2;
+  return resultado;
+}
+
 class Comida {
   constructor(comida, precio) {
     this.comida = comida; //que queres pedir
@@ -9,7 +14,7 @@ class Comida {
   }
 }
 
-// menu 
+// menu
 
 const chocotorta = new Comida("Chocotorta", 200);
 const lemonPie = new Comida("Lemon Pie", 100);
@@ -17,7 +22,6 @@ const cheescake = new Comida("Cheescake", 259);
 const rogel = new Comida("Rogel", 180);
 const brownie = new Comida("Brownie", 200);
 const tiramisu = new Comida("Tiramisu", 220);
-
 
 let opcion = parseInt(
   prompt(
@@ -59,31 +63,40 @@ while (opcionElegida === false) {
   }
 }
 
-alert("Tu opción elegida cuesta: $" + opcionMenu.precio);
+let pregunta = parseInt(
+  prompt("Escriba la cantidad de " + opcionMenu.comida + "s que vas a querer")
+);
+alert("Tu opción elegida cuesta: $" + mult(pregunta, opcionMenu.precio));
+
 let opcionTarjeta = prompt(
   "Con que tarjeta desea pagar?        VISA // AMERICAN EXPRESS // DINERS"
 ).toLowerCase();
-let opcionValidar = true;
+let opcionValidar = false;
 
-while (opcionValidar === true) {
+while (opcionValidar === false) {
+  
   if (
     opcionTarjeta === "visa" ||
     opcionTarjeta === "american express" ||
     opcionTarjeta === "diners"
   ) {
     let cuotas = prompt(
-      "Escriba en cuantas cuotas desea abonar.    1. En 12 cuotas   2. En 6 cuotas   3. En 3 cuotas"
+      "Escriba en cuantas cuotas desea abonar"
     );
-    alert(
-      "Compra finalizada. Has encargado " +
-        opcionMenu.comida +
-        " y has elegido abonar en " +
-        cuotas +
-        " cuotas con la tarjeta " +
-        opcionTarjeta
-    );
-    opcionValidar = false;
-    // break
+
+    if (cuotas > 6 || cuotas < 1) {
+      alert("Invalido");
+    } else {
+      alert(
+        "Compra finalizada. Has encargado " +
+          opcionMenu.comida +
+          " y has elegido abonar en " +
+          cuotas +
+          " cuotas con la tarjeta " +
+          opcionTarjeta
+      );
+      opcionValidar = true;
+    }
   } else {
     opcionTarjeta = prompt(
       "Esa tarjeta no existe. Vuelva a intentar!!        VISA // AMERICAN EXPRESS // DINERS"
