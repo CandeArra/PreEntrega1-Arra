@@ -1,13 +1,15 @@
 let nombreUsuario = prompt(
-  "Hola! Bienvenido a la pasteleria de Candelaria, como te llamas?"
+  "Hola! Bienvenido a la pasteleria de Candelaria, cómo te llamas?"
 );
 
 class Comida {
   constructor(comida, precio) {
     this.comida = comida; //que queres pedir
-    this.precio = precio; // cuanto queres
+    this.precio = precio; // cuanto sale
   }
 }
+
+// menu 
 
 const chocotorta = new Comida("Chocotorta", 200);
 const lemonPie = new Comida("Lemon Pie", 100);
@@ -15,15 +17,13 @@ const cheescake = new Comida("Cheescake", 259);
 const rogel = new Comida("Rogel", 180);
 const brownie = new Comida("Brownie", 200);
 const tiramisu = new Comida("Tiramisu", 220);
-const tartaDeVerdura = new Comida("Tarta de Verdura", 140);
-const tartaDeJamonYQueso = new Comida("Tarta de jamon y queso", 160);
-const arrolladoDeAtun = new Comida("Arrollado de atun", 170);
+
 
 let opcion = parseInt(
   prompt(
-    "¿Que deseas pedir " +
+    "¿Qué deseas pedir " +
       nombreUsuario +
-      "? Escriba el unicamente el numero.     1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu  7. Tarta de Verdura  8. Tarta de jamon y queso  9. Arrollado de atun "
+      "? Escriba el unicamente el número.     1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu  "
   ) //tildes
 );
 
@@ -49,26 +49,17 @@ while (opcionElegida === false) {
   } else if (opcion === 6) {
     opcionElegida = true;
     opcionMenu = tiramisu;
-  } else if (opcion === 7) {
-    opcionElegida = true;
-    opcionMenu = tartaDeVerdura;
-  } else if (opcion === 8) {
-    opcionElegida = true;
-    opcionMenu = tartaDeJamonYQueso;
-  } else if (opcion === 9) {
-    opcionElegida = true;
-    opcionMenu = arrolladoDeAtun;
   } else {
     alert("Ese valor no existe");
     opcion = parseInt(
       prompt(
-        "¡¡Vuelva a ver sus opciones!!   1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu  7. Tarta de Verdura  9. Tarta de jamon y queso  10. Arrollado de atun "
+        "¡¡Vuelva a ver sus opciones!!   1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu "
       )
     ); //tildes
   }
 }
 
-alert("Tu opcion elegida cuesta: $" + opcionMenu.precio);
+alert("Tu opción elegida cuesta: $" + opcionMenu.precio);
 let opcionTarjeta = prompt(
   "Con que tarjeta desea pagar?        VISA // AMERICAN EXPRESS // DINERS"
 ).toLowerCase();
