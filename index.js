@@ -23,7 +23,7 @@ let opcion = parseInt(
   prompt(
     "¿Que deseas pedir " +
       nombreUsuario +
-      "? Escriba el unicamente el numero.   1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu  7. Tarta de Verdura  8. Tarta de jamon y queso  9. Arrollado de atun "
+      "? Escriba el unicamente el numero.     1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu  7. Tarta de Verdura  8. Tarta de jamon y queso  9. Arrollado de atun "
   ) //tildes
 );
 
@@ -71,17 +71,17 @@ while (opcionElegida === false) {
 alert("Tu opcion elegida cuesta: $" + opcionMenu.precio);
 let opcionTarjeta = prompt(
   "Con que tarjeta desea pagar?        VISA // AMERICAN EXPRESS // DINERS"
-).toUpperCase();
+).toLowerCase();
 let opcionValidar = true;
 
 while (opcionValidar === true) {
   if (
-    opcionTarjeta === "VISA" ||
-    opcionTarjeta === "AMERICAN EXPRESS" ||
-    opcionTarjeta === "DINERS"
+    opcionTarjeta === "visa" ||
+    opcionTarjeta === "american express" ||
+    opcionTarjeta === "diners"
   ) {
     let cuotas = prompt(
-      "Escriba en cuantas cuotas desea abonar.    1. En 12 cuotas   2. En 6 cuotas   3. En 3 cuota"
+      "Escriba en cuantas cuotas desea abonar.    1. En 12 cuotas   2. En 6 cuotas   3. En 3 cuotas"
     );
     alert(
       "Compra finalizada. Has encargado " +
@@ -92,9 +92,10 @@ while (opcionValidar === true) {
         opcionTarjeta
     );
     opcionValidar = false;
+    // break
   } else {
     opcionTarjeta = prompt(
       "Esa tarjeta no existe. Vuelva a intentar!!        VISA // AMERICAN EXPRESS // DINERS"
-    ).toUpperCase();
+    ).toLowerCase();
   }
 }
