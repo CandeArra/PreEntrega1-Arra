@@ -2,100 +2,169 @@ let nombreUsuario = prompt(
   "Hola! Bienvenido a la pasteleria de Candelaria, cómo te llamas?"
 );
 
-function mult(num1, num2) {
-  let resultado = num1 * num2;
-  return resultado;
-}
-
 class Comida {
   constructor(comida, precio) {
     this.comida = comida; //que queres pedir
     this.precio = precio; // cuanto sale
   }
-}
 
-// menu
+  mult(num1, num2) {
+    let resultado = num1 * num2;
+    return resultado;
+  }
 
-const chocotorta = new Comida("Chocotorta", 200);
-const lemonPie = new Comida("Lemon Pie", 100);
-const cheescake = new Comida("Cheescake", 259);
-const rogel = new Comida("Rogel", 180);
-const brownie = new Comida("Brownie", 200);
-const tiramisu = new Comida("Tiramisu", 220);
-
-let opcion = parseInt(
-  prompt(
-    "¿Qué deseas pedir " +
-      nombreUsuario +
-      "? Escriba el unicamente el número.     1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu  "
-  ) //tildes
-);
-
-let opcionElegida = false;
-let opcionMenu;
-
-while (opcionElegida === false) {
-  if (opcion === 1) {
-    opcionElegida = true;
-    opcionMenu = chocotorta;
-  } else if (opcion === 2) {
-    opcionElegida = true;
-    opcionMenu = lemonPie;
-  } else if (opcion === 3) {
-    opcionElegida = true;
-    opcionMenu = cheescake;
-  } else if (opcion === 4) {
-    opcionElegida = true;
-    opcionMenu = rogel;
-  } else if (opcion === 5) {
-    opcionElegida = true;
-    opcionMenu = brownie;
-  } else if (opcion === 6) {
-    opcionElegida = true;
-    opcionMenu = tiramisu;
-  } else {
-    alert("Ese valor no existe");
-    opcion = parseInt(
-      prompt(
-        "¡¡Vuelva a ver sus opciones!!   1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu "
-      )
-    ); //tildes
+  packaging() {
+    this.precio += 50; 
   }
 }
 
-let pregunta = parseInt(
-  prompt("Escriba la cantidad de " + opcionMenu.comida + "s que vas a querer")
-);
-alert("Tu opción elegida cuesta: $" + mult(pregunta, opcionMenu.precio));
+// menu
+const tortas = [];
+tortas.push(new Comida("Chocotorta", 200))
+tortas.push(new Comida("Lemon Pie", 100))
+tortas.push(new Comida("Cheescake", 259))
+tortas.push(new Comida("Rogel", 180))
+tortas.push(new Comida("Brownie", 200))
+tortas.push(new Comida("Tiramisu", 220))
+
+for (const torta of tortas) {
+  torta.packaging();
+}
+
+let opcionElegida = false;
+let opcionMenu;
+let carrito = [];
+
+while (opcionElegida === false) {
+
+  let opcion = parseInt(
+    prompt(
+      "¿Qué deseas pedir " +
+        nombreUsuario +
+        "? Escriba el unicamente el número.     1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu  "
+    ) 
+  );
+
+  switch (opcion) {
+    case 1:
+      opcionMenu = tortas[0];
+      break;
+    case 2:
+      opcionMenu = tortas[1];
+      break;
+    case 3:
+      opcionMenu = tortas[2];
+      break;
+    case 4:
+      opcionMenu = tortas[3];
+      break;
+    case 5:
+      opcionMenu = tortas[4];
+      break;
+    case 6:
+      opcionMenu = tortas[5];
+      break;
+    default:
+      alert("Ese valor no existe");
+      opcion = parseInt(
+        prompt(
+          "¡¡Vuelva a ver sus opciones!!   1. Chocotorta  2. Lemon Pie  3. Cheescake  4. Rogel  5. Brownie  6. Tiramisu "
+        )
+      );
+  }
+
+  let pregunta;
+
+  if (
+    opcionMenu === tortas[5] ||
+    opcionMenu === tortas[4] ||
+    opcionMenu === tortas[2] ||
+    opcionMenu === tortas[1] ||
+    opcionMenu === tortas[0]
+  ) {
+    pregunta = parseInt(
+      prompt("Escriba la cantidad de " + opcionMenu.comida + "s que vas a querer")
+    );
+  } else if (opcionMenu === tortas[3]) {
+    pregunta = parseInt(
+      prompt(
+        "Escriba la cantidad de " + opcionMenu.comida + "es que vas a querer"
+      )
+    );
+  }
+
+  if (opcionMenu) {
+    carrito.push(opcionMenu)
+  }
+
+  opcionMenu.precio =  opcionMenu.precio * pregunta
+  let total = 0;
+  
+  carrito.forEach( (producto) => {
+    total = total + producto.precio;
+  })
+
+  alert("Total de compra: $" + total )
+  
+  let vuelta = false;
+
+  while (vuelta === false) {
+
+    let repetir = prompt("Queres comprar algo mas?").toLowerCase().trim();
+
+    if (repetir === "no") {
+      opcionElegida = true;
+      vuelta = true
+
+    } else if (repetir === "si") {
+      opcionElegida = false;
+      vuelta = true
+    } else {
+      alert("Esa respuesta no contesta mi pregunta")
+    }
+  }
+
+}
+
 
 let opcionTarjeta = prompt(
   "Con que tarjeta desea pagar?        VISA // AMERICAN EXPRESS // DINERS"
 ).toLowerCase();
-let opcionValidar = false;
 
+let opcionValidar = false;
 while (opcionValidar === false) {
-  
+
   if (
     opcionTarjeta === "visa" ||
     opcionTarjeta === "american express" ||
     opcionTarjeta === "diners"
   ) {
-    let cuotas = prompt(
-      "Escriba en cuantas cuotas desea abonar"
-    );
-
+    let cuotas = parseInt(prompt("Escriba en cuantas cuotas desea abonar"));
     if (cuotas > 6 || cuotas < 1) {
-      alert("Invalido");
-    } else {
+      alert("Numero de cuotas inexistentes");
+    } else if (cuotas === 1) {
       alert(
         "Compra finalizada. Has encargado " +
-          opcionMenu.comida +
+         carrito.map(carrito => carrito.comida).toLowerCase()
+        + /*MAL*/ 
+          " y has elegido abonar en " +
+          cuotas +
+          " cuota con la tarjeta " +
+          opcionTarjeta
+      );
+      opcionValidar = true;
+    } else if (cuotas > 1 || cuotas < 7) {
+      alert(
+        "Compra finalizada. Has encargado " +
+        carrito.map(carrito => carrito.comida) + 
           " y has elegido abonar en " +
           cuotas +
           " cuotas con la tarjeta " +
           opcionTarjeta
       );
       opcionValidar = true;
+    } else {
+      alert("Invalido");
     }
   } else {
     opcionTarjeta = prompt(
@@ -103,3 +172,4 @@ while (opcionValidar === false) {
     ).toLowerCase();
   }
 }
+//opcionMenu.comida
